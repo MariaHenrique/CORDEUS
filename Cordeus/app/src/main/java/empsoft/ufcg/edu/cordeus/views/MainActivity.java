@@ -1,14 +1,9 @@
 package empsoft.ufcg.edu.cordeus.views;
 
-import android.graphics.PixelFormat;
+import android.app.Activity;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.MediaController;
@@ -16,18 +11,16 @@ import android.widget.VideoView;
 
 import empsoft.ufcg.edu.cordeus.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         final VideoView videoView = (VideoView) findViewById(R.id.videoView);
         Uri video = Uri.parse("android.resource://" + getPackageName() + "/" +
-                R.raw.movie);
+                R.raw.outrovideo);
         videoView.setVideoURI(video);
         MediaController mediaController = new MediaController(this);
         mediaController.setAnchorView(videoView);
