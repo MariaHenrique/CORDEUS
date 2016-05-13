@@ -1,57 +1,40 @@
 package empsoft.ufcg.edu.cordeus.views;
 
-import android.app.Activity;
-import android.media.MediaPlayer;
-import android.net.Uri;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.MediaController;
-import android.widget.VideoView;
+import android.support.v7.widget.CardView;
+import android.util.Log;
+import android.view.View;
 
 import empsoft.ufcg.edu.cordeus.R;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
+
+    private static final int REQUEST_PLAY_VIDEO = 101;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final VideoView videoView = (VideoView) findViewById(R.id.videoView);
-        Uri video = Uri.parse("android.resource://" + getPackageName() + "/" +
-                R.raw.outrovideo);
-        videoView.setVideoURI(video);
-        MediaController mediaController = new MediaController(this);
-        mediaController.setAnchorView(videoView);
-        videoView.setMediaController(mediaController);
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        final CardView cardView = (CardView) findViewById(R.id.card_view);
+        cardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPrepared(MediaPlayer mp) {
-                videoView.start();
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, VideoActivity.class);
+                startActivityForResult(intent, REQUEST_PLAY_VIDEO);
             }
         });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_PLAY_VIDEO && resultCode == RESULT_OK) {
+            Log.d(TAG, "no onActivityResult, o resultado foi ok.");
+        } else if (requestCode == REQUEST_PLAY_VIDEO && resultCode == RESULT_CANCELED) {
+            Log.d(TAG, "no onActivityResult, o resultado indica que algo deu errado na reprodução");
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }
