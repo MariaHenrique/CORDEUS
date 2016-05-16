@@ -2,7 +2,10 @@ package empsoft.ufcg.edu.cordeus.controllers;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.SharedElementCallback;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -10,17 +13,20 @@ import org.json.JSONObject;
 
 import empsoft.ufcg.edu.cordeus.utils.HttpListener;
 import empsoft.ufcg.edu.cordeus.utils.HttpUtils;
+import empsoft.ufcg.edu.cordeus.utils.MySharedPreferences;
 
 public class UserController {
 
     private HttpUtils mHttp;
     private Activity mActivity;
     private String url;
+    private MySharedPreferences mySharedPreferences;
 
     public UserController(Activity activity) {
         mActivity = activity;
         mHttp = new HttpUtils(mActivity);
         url =  "http://cordeus-cordeus.rhcloud.com/";
+        mySharedPreferences = new MySharedPreferences(mActivity.getApplicationContext());
     }
 
     public void registerUser(String username, String password){
@@ -82,7 +88,7 @@ public class UserController {
 
     }
 
-    public void login(String login, String password) {
+    public void login(final String login, final String password, final Class classDest) {
         //mLoading.setVisibility(View.VISIBLE);
         String rout_check_login = url + "checklogin";
         final JSONObject json = new JSONObject();
@@ -103,14 +109,15 @@ public class UserController {
                                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                       // mLoading.setVisibility(View.GONE);
+                                        // mLoading.setVisibility(View.GONE);
                                     }
                                 })
                                 .create()
                                 .show();
                     } else {
-                       // setView(LoginActivity.this, DonorsActivity.class);
-                        //finish();
+                        mySharedPreferences.saveUser(login, password);
+                        setView(mActivity, classDest);
+                        mActivity.finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -125,13 +132,19 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                               // mLoading.setVisibility(View.GONE);
+                                // mLoading.setVisibility(View.GONE);
                             }
                         })
                         .create()
                         .show();
             }
         });
+    }
+
+    public void setView(Context context, Class classe) {
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        mActivity.startActivity(it);
     }
 }
 
