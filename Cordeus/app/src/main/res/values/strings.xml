@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Cordeus</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    <string name="hint_username">Nome de usuário</string>
+    <string name="hint_password">Senha</string>
+    <string name="btn_cadastre">Cadastrar</string>
+    <string name="btn_login">Entrar</string>
+    <string name="btn_register">Cadastre-se</string>
 </resources>
