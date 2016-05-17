@@ -61,15 +61,15 @@ public class MainActivity extends AppCompatActivity {
 
     public List<Cordel> getMyCordeis() {
         int color = getResources().getColor(R.color.colorAccent);
-        Cordel cordel1 = new Cordel(color);
-        Cordel cordel2 = new Cordel(color);
-        Cordel cordel3 = new Cordel(color);
-        Cordel cordel4 = new Cordel(color);
-        Cordel cordel5 = new Cordel(color);
-        Cordel cordel6 = new Cordel(color);
-        Cordel cordel7 = new Cordel(color);
-        Cordel cordel8 = new Cordel(color);
-        Cordel cordel9 = new Cordel(color);
+        Cordel cordel1 = new Cordel("Cordel 01", color);
+        Cordel cordel2 = new Cordel("Cordel 02", color);
+        Cordel cordel3 = new Cordel("Cordel 03", color);
+        Cordel cordel4 = new Cordel("Cordel 04", color);
+        Cordel cordel5 = new Cordel("Cordel 05", color);
+        Cordel cordel6 = new Cordel("Cordel 06", color);
+        Cordel cordel7 = new Cordel("Cordel 07", color);
+        Cordel cordel8 = new Cordel("Cordel 08", color);
+        Cordel cordel9 = new Cordel("Cordel 09", color);
 
 
         List<Cordel> reflectionInfos = new ArrayList<>();
@@ -87,15 +87,15 @@ public class MainActivity extends AppCompatActivity {
 
     public List<Cordel> getNewCordeis() {
         int colorNew = getResources().getColor(R.color.colorPrimaryDark);
-        Cordel cordel1 = new Cordel(colorNew);
-        Cordel cordel2 = new Cordel(colorNew);
-        Cordel cordel3 = new Cordel(colorNew);
-        Cordel cordel4 = new Cordel(colorNew);
-        Cordel cordel5 = new Cordel(colorNew);
-        Cordel cordel6 = new Cordel(colorNew);
-        Cordel cordel7 = new Cordel(colorNew);
-        Cordel cordel8 = new Cordel(colorNew);
-        Cordel cordel9 = new Cordel(colorNew);
+        Cordel cordel1 = new Cordel("Cordel 01", colorNew);
+        Cordel cordel2 = new Cordel("Cordel 02", colorNew);
+        Cordel cordel3 = new Cordel("Cordel 03", colorNew);
+        Cordel cordel4 = new Cordel("Cordel 04", colorNew);
+        Cordel cordel5 = new Cordel("Cordel 05", colorNew);
+        Cordel cordel6 = new Cordel("Cordel 06", colorNew);
+        Cordel cordel7 = new Cordel("Cordel 07", colorNew);
+        Cordel cordel8 = new Cordel("Cordel 08", colorNew);
+        Cordel cordel9 = new Cordel("Cordel 09", colorNew);
 
 
         List<Cordel> reflectionInfos = new ArrayList<>();
