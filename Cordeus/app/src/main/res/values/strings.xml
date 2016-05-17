@@ -9,4 +9,8 @@
     <string name="btn_cadastre">Cadastrar</string>
     <string name="btn_login">Entrar</string>
     <string name="btn_register">Cadastre-se</string>
+    <string name="title_activity_new_cordel">NewCordelActivity</string>
+
+    <string name="btn_to_buy">Comprar</string>
+    <string name="btn_code">Usar código promocional</string>
 </resources>

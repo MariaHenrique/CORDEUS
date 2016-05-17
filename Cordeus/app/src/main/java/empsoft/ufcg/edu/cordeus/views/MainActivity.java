@@ -1,12 +1,12 @@
 package empsoft.ufcg.edu.cordeus.views;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         newReflections.setAdapter(new ReflectionAdapter(getNewCordeis(), new OnItemClickListener() {
             @Override
             public void onItemClick(Cordel cordel) {
-                Toast.makeText(MainActivity.this, "abrir o dialog pra comprar", Toast.LENGTH_SHORT).show();
+                setView(MainActivity.this, NewCordelActivity.class);
             }
         }));
     }
@@ -109,5 +109,12 @@ public class MainActivity extends AppCompatActivity {
         reflectionInfos.add(cordel8);
         reflectionInfos.add(cordel9);
         return reflectionInfos;
+    }
+
+
+    public void setView(Context context, Class classe) {
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
     }
 }
