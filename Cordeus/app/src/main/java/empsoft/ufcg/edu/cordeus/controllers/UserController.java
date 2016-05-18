@@ -2,7 +2,6 @@ package empsoft.ufcg.edu.cordeus.controllers;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.SharedElementCallback;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -133,6 +132,107 @@ public class UserController {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 // mLoading.setVisibility(View.GONE);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+    }
+
+    public void validateCode(final String code, final Class classDest){
+        String rout_get_code = url + "getcode";
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("code", code);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mHttp.post(rout_get_code, json.toString(), new HttpListener() {
+            @Override
+            public void onSucess(JSONObject result) {
+                try {
+                    if (result.getInt("ok") == 0) {
+                        new AlertDialog.Builder(mActivity)
+                                .setTitle("Erro")
+                                .setMessage(result.getString("msg"))
+                                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        // mLoading.setVisibility(View.GONE);
+                                    }
+                                })
+                                .create()
+                                .show();
+                    } else {
+                        useCode(json, classDest);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível.")
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+
+
+    }
+
+    private void useCode(final JSONObject json, final Class classDest){
+
+        String rout_remove_code = url + "removecode";
+
+        mHttp.post(rout_remove_code, json.toString(), new HttpListener() {
+            @Override
+            public void onSucess(JSONObject result) throws JSONException{
+                if (result.getInt("ok") == 0) {
+                    Log.d("DANI", "ok 0");
+                    new AlertDialog.Builder(mActivity)
+                            .setTitle("Erro")
+                            .setMessage(result.getString("msg"))
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //mLoadingCadastre.setVisibility(View.GONE);
+                                }
+                            })
+                            .create()
+                            .show();
+                } else {
+                    new AlertDialog.Builder(mActivity)
+                            .setTitle("Cordel retirado ")
+                            .setMessage("Seu cordel já está disponível. Aproveite!")
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    setView(mActivity, classDest);
+                                }
+                            })
+                            .create()
+                            .show();
+                }
+            }
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível!")
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // mLoadingCadastre.setVisibility(View.GONE);
                             }
                         })
                         .create()
