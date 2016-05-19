@@ -6,20 +6,26 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp">
 
-    <EditText
-        android:id="@+id/et_code"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_code"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:maxLength="6"
-        android:hint="Insira seu código promocional aqui" />
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:maxLength="6"
+            android:hint="@string/hint_code" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/btn_ok"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:minWidth="64dp"
-        android:layout_below="@id/et_code"
+        android:layout_below="@id/input_layout_code"
         android:layout_alignParentEnd="true"
         android:gravity="right"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -27,9 +33,5 @@
         android:paddingBottom="8dp"
         android:textColor="@color/green"
         android:text="ok" />
-
-
-
-
 
 </RelativeLayout>
