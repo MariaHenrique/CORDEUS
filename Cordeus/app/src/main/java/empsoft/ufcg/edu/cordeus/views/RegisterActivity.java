@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.support.design.widget.TextInputLayout;
+import android.widget.ImageButton;
 
 import empsoft.ufcg.edu.cordeus.R;
 import empsoft.ufcg.edu.cordeus.controllers.UserController;
@@ -25,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String username;
     private String password;
     private String passwordConfirm;
+    private ImageButton account_user;
 
     private UserController usercontroller;
 

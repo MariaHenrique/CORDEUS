@@ -1,6 +1,7 @@
 package empsoft.ufcg.edu.cordeus.views;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +10,21 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.HashMap;
+
 import empsoft.ufcg.edu.cordeus.R;
 import empsoft.ufcg.edu.cordeus.controllers.UserController;
+import empsoft.ufcg.edu.cordeus.models.Cordel;
+import empsoft.ufcg.edu.cordeus.utils.MySharedPreferences;
 
 public class NewCordelActivity extends AppCompatActivity {
 
     private UserController userController;
+    private Cordel cordel;
+    private String login;
+    private HashMap<String, String> userDetails;
+    private MySharedPreferences mySharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +32,10 @@ public class NewCordelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_cordel);
 
         final Button code_promotional = (Button) findViewById(R.id.btn_code_promotional);
+        mySharedPreferences = new MySharedPreferences(getApplicationContext());
         userController = new UserController(NewCordelActivity.this);
+        userDetails = mySharedPreferences.getUserDetails();
+        login = userDetails.get(MySharedPreferences.KEY_USERNAME);
 
         code_promotional.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +43,9 @@ public class NewCordelActivity extends AppCompatActivity {
                 openDialog();
             }
         });
+
+        Intent it = getIntent();
+        cordel = (Cordel) it.getSerializableExtra("NEWCORDEL");
 
     }
 
@@ -49,8 +65,9 @@ public class NewCordelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String code = code_promotional.getText().toString();
+
                 if (validateCodePromotional(code, code_promotional, mLayoutCode)) {
-                    userController.validateCode(code, MainActivity.class);
+                    userController.validateCode(login, cordel.getTitle(), code, MainActivity.class);
                 } else if (!validateCodePromotional(code, code_promotional, mLayoutCode)){
                     return;
                 }

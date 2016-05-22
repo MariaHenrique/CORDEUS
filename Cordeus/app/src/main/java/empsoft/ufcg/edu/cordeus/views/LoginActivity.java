@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (validateUsername() && validatePassword()) {
                     userController.login(username, password, MainActivity.class);
+                    userController.getMyCordels(username);
                     Log.d("USER_LOGGED", mySharedPreferences.isUserLoggedIn() + "");
                 } else if (!validateUsername()){
                     return;

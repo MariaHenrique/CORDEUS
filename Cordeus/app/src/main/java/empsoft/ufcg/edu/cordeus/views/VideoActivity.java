@@ -1,15 +1,16 @@
 package empsoft.ufcg.edu.cordeus.views;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.MediaController;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import empsoft.ufcg.edu.cordeus.R;
+import empsoft.ufcg.edu.cordeus.models.Cordel;
 
 public class VideoActivity extends Activity implements MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
     private static final String TAG = "MainActivity";
@@ -19,9 +20,21 @@ public class VideoActivity extends Activity implements MediaPlayer.OnCompletionL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
 
+        Intent it = getIntent();
+        Cordel cordel = (Cordel) it.getSerializableExtra("CORDEL");
+
+        Uri video = null;
         final VideoView videoView = (VideoView) findViewById(R.id.videoView);
-        Uri video = Uri.parse("android.resource://" + getPackageName() + "/" +
-                R.raw.outrovideo);
+        if (cordel.getTitle().equals("Lamentações 3:22-23")){
+            video = Uri.parse("android.resource://" + getPackageName() + "/" +
+                    R.raw.lamentacoes3_22_23);
+        }
+        if (cordel.getTitle().equals("Filipenses 3:13-14")){
+            video = Uri.parse("android.resource://" + getPackageName() + "/" +
+                    R.raw.filipenses_3_13_14);
+        }
+
+
         videoView.setVideoURI(video);
         MediaController mediaController = new MediaController(this);
         mediaController.setAnchorView(videoView);
