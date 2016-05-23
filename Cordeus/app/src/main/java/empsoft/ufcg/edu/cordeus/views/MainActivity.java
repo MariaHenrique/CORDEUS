@@ -23,9 +23,12 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_PLAY_VIDEO = 101;
     private static final String TAG = "MainActivity";
     private List<String> refer_myCordels;
+    private List<String> refer_newCordels;
     private UserController userController;
     private HashMap<String, String> userDetails;
     private MySharedPreferences mySharedPreferences;
+    private RecyclerView myReflections;
+    private RecyclerView newReflections;
     private String login;
     private List<Cordel> myCordels;
     private List<Cordel> newCordels;
@@ -43,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         account_user = (ImageButton) findViewById(R.id.ib_account);
 
-        RecyclerView myReflections = (RecyclerView) findViewById(R.id.my_reflections);
+        myReflections = (RecyclerView) findViewById(R.id.my_reflections);
         myReflections.setLayoutManager(llm);
-        RecyclerView newReflections = (RecyclerView) findViewById(R.id.new_reflections);
+        newReflections = (RecyclerView) findViewById(R.id.new_reflections);
         newReflections.setLayoutManager(llm2);
 
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
@@ -56,23 +59,8 @@ public class MainActivity extends AppCompatActivity {
         refer_myCordels = new ArrayList<>();
         refer_myCordels = mySharedPreferences.getMyCordels();
 
-        myReflections.setAdapter(new ReflectionAdapter(getMyCordeis(), new OnItemClickListener() {
-            @Override
-            public void onItemClick(Cordel cordel) {
-                Intent intent = new Intent(MainActivity.this, VideoActivity.class);
-                intent.putExtra("CORDEL", cordel);
-                startActivityForResult(intent, REQUEST_PLAY_VIDEO);
-            }
-        }));
-
-        newReflections.setAdapter(new ReflectionAdapter(getNewCordeis(), new OnItemClickListener() {
-            @Override
-            public void onItemClick(Cordel cordel) {
-                Intent it = new Intent(MainActivity.this, NewCordelActivity.class);
-                it.putExtra("NEWCORDEL", cordel);
-                startActivity(it);
-            }
-        }));
+        updateMyReflections();
+        updateNewReflections();
 
         account_user.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +79,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void updateMyReflections() {
+        myReflections.setAdapter(new ReflectionAdapter(getMyCordeis(), new OnItemClickListener() {
+            @Override
+            public void onItemClick(Cordel cordel) {
+                Intent intent = new Intent(MainActivity.this, VideoActivity.class);
+                intent.putExtra("CORDEL", cordel);
+                startActivityForResult(intent, REQUEST_PLAY_VIDEO);
+            }
+        }));
+    }
+
+    private void updateNewReflections() {
+        newReflections.setAdapter(new ReflectionAdapter(getNewCordeis(), new OnItemClickListener() {
+            @Override
+            public void onItemClick(Cordel cordel) {
+                Intent it = new Intent(MainActivity.this, NewCordelActivity.class);
+                it.putExtra("NEWCORDEL", cordel);
+                startActivity(it);
+            }
+        }));
+    }
+
     public List<Cordel> getMyCordeis() {
         myCordels = new ArrayList<>();
         for (String refer : refer_myCordels) {
@@ -106,20 +116,32 @@ public class MainActivity extends AppCompatActivity {
                 return R.mipmap.lamentacoes_3_22_23;
             case "Filipenses 3:13-14":
                 return R.mipmap.filipenses_3_13_14;
+            default:
+                return R.mipmap.cordel_blocked;
         }
-        return 0;
     }
 
     public List<Cordel> getNewCordeis() {
         newCordels = new ArrayList<>();
-        if (isNewToUser("Filipenses 3:13-14")) {
-            Cordel cordel = new Cordel("Filipenses 3:13-14", "Filipenses 3:13-14", R.mipmap.filipenses_3_13_14);
-            newCordels.add(cordel);
+        refer_newCordels = getRefNewCordels();
+        for (String ref : refer_newCordels) {
+            if (isNewToUser(ref)) {
+                Cordel cordel = new Cordel(ref, ref, getImage(ref));
+                newCordels.add(cordel);
+            }
         }
         return newCordels;
     }
 
     private boolean isNewToUser(String refer) {
         return !refer_myCordels.contains(refer);
+    }
+
+    public List<String> getRefNewCordels() {
+        List<String> refNewCordels = new ArrayList<>();
+        refNewCordels.add("São João");
+        refNewCordels.add("São Pedro");
+        refNewCordels.add("Santo Antônio");
+        return refNewCordels;
     }
 }
