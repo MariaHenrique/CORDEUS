@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +14,9 @@ import org.json.JSONObject;
 import empsoft.ufcg.edu.cordeus.utils.HttpListener;
 import empsoft.ufcg.edu.cordeus.utils.HttpUtils;
 import empsoft.ufcg.edu.cordeus.utils.MySharedPreferences;
+import empsoft.ufcg.edu.cordeus.views.LoginActivity;
 import empsoft.ufcg.edu.cordeus.views.MainActivity;
+import empsoft.ufcg.edu.cordeus.views.RegisterActivity;
 
 public class UserController {
 
@@ -30,7 +33,7 @@ public class UserController {
     }
 
     public void registerUser(final String username, String password){
-       // mLoadingCadastre.setVisibility(View.VISIBLE);
+        RegisterActivity.mLoadingRegister.setVisibility(View.VISIBLE);
         String rout_register = url + "registeruser";
         JSONObject json = new JSONObject();
         try {
@@ -50,7 +53,7 @@ public class UserController {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    //mLoadingCadastre.setVisibility(View.GONE);
+                                    RegisterActivity.mLoadingRegister.setVisibility(View.GONE);
                                 }
                             })
                             .create()
@@ -79,7 +82,7 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                               // mLoadingCadastre.setVisibility(View.GONE);
+                                RegisterActivity.mLoadingRegister.setVisibility(View.GONE);
                             }
                         })
                         .create()
@@ -90,7 +93,7 @@ public class UserController {
     }
 
     public void login(final String login, final String password, final Class classDest) {
-        //mLoading.setVisibility(View.VISIBLE);
+        LoginActivity.mLoadingLogin.setVisibility(View.VISIBLE);
         String rout_check_login = url + "checklogin";
         final JSONObject json = new JSONObject();
         try {
@@ -110,7 +113,7 @@ public class UserController {
                                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        // mLoading.setVisibility(View.GONE);
+                                        LoginActivity.mLoadingLogin.setVisibility(View.GONE);
                                     }
                                 })
                                 .create()
@@ -133,7 +136,7 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                // mLoading.setVisibility(View.GONE);
+                                LoginActivity.mLoadingLogin.setVisibility(View.GONE);
                             }
                         })
                         .create()

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import empsoft.ufcg.edu.cordeus.views.LoginActivity;
+import empsoft.ufcg.edu.cordeus.views.MainActivity;
 
 public class  MySharedPreferences {
 
@@ -79,6 +80,17 @@ public class  MySharedPreferences {
         }
     }
 
+    public boolean checkLogin(){
+        if(this.isUserLoggedIn()){
+            Intent i = new Intent(mContext, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(i);
+
+            return true;
+        }
+        return false;
+    }
 
     public boolean isUserLoggedIn(){
         return mPref.getBoolean(IS_USER_LOGIN, false);

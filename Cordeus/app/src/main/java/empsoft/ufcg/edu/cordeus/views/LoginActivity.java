@@ -27,12 +27,14 @@ public class LoginActivity extends AppCompatActivity {
     private Button mRegister;
     private UserController userController;
     private MySharedPreferences mySharedPreferences;
+    public static View mLoadingLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mLoadingLogin = findViewById(R.id.loadingLogin);
         userController = new UserController(LoginActivity.this);
         mUsername = (EditText) findViewById(R.id.et_username);
         mPassword = (EditText) findViewById(R.id.et_password);
