@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
     public List<String> getRefNewCordels() {
         List<String> refNewCordels = new ArrayList<>();
+        refNewCordels.add("Filipenses 3:13-14");
         refNewCordels.add("São João");
         refNewCordels.add("São Pedro");
         refNewCordels.add("Santo Antônio");
