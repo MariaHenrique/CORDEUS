@@ -26,15 +26,15 @@ public class RegisterActivity extends AppCompatActivity {
     private String username;
     private String password;
     private String passwordConfirm;
-    private ImageButton account_user;
-
     private UserController usercontroller;
+    public static View mLoadingRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        mLoadingRegister = findViewById(R.id.loadingRegister);
         mRegister = (Button) findViewById(R.id.btn_cadastre);
         mUsername = (EditText) findViewById(R.id.et_username);
         mPassword = (EditText) findViewById(R.id.et_password);
