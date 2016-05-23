@@ -22,7 +22,7 @@ public class CordelViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(final Cordel cordel, final OnItemClickListener listener) {
-        imCordelIcon.setBackgroundColor(cordel.getIcon());
+        imCordelIcon.setBackgroundResource(cordel.getIcon());
         tvTitleCordel.setText(cordel.getTitle());
 
         itemCordel.setOnClickListener(new View.OnClickListener() {

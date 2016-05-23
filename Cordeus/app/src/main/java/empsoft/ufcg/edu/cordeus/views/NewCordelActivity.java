@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.HashMap;
 
@@ -46,7 +48,16 @@ public class NewCordelActivity extends AppCompatActivity {
 
         Intent it = getIntent();
         cordel = (Cordel) it.getSerializableExtra("NEWCORDEL");
+        showDetails(cordel);
+    }
 
+    private void showDetails(Cordel cordel) {
+        final ImageView imageView = (ImageView) findViewById(R.id.iv_cordel);
+        final TextView tvTitle = (TextView) findViewById(R.id.tv_title);
+        final TextView tvPassage = (TextView) findViewById(R.id.tv_passage);
+        imageView.setBackgroundResource(cordel.getIcon());
+        tvTitle.setText(cordel.getTitle());
+        tvPassage.setText(cordel.getPassage());
     }
 
     private void openDialog() {
@@ -68,7 +79,7 @@ public class NewCordelActivity extends AppCompatActivity {
 
                 if (validateCodePromotional(code, code_promotional, mLayoutCode)) {
                     userController.validateCode(login, cordel.getTitle(), code, MainActivity.class);
-                } else if (!validateCodePromotional(code, code_promotional, mLayoutCode)){
+                } else if (!validateCodePromotional(code, code_promotional, mLayoutCode)) {
                     return;
                 }
             }
@@ -76,7 +87,7 @@ public class NewCordelActivity extends AppCompatActivity {
 
     }
 
-    private boolean validateCodePromotional(final String code, final EditText editTextCode, final TextInputLayout layoutCode){
+    private boolean validateCodePromotional(final String code, final EditText editTextCode, final TextInputLayout layoutCode) {
         if (code.trim().isEmpty()) {
             layoutCode.setError(getString(R.string.err_msg_code_promotional));
             requestFocus(editTextCode);

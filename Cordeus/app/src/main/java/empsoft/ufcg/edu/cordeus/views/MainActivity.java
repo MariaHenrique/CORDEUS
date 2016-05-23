@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private HashMap<String, String> userDetails;
     private MySharedPreferences mySharedPreferences;
     private String login;
-    private  List<Cordel> myCordels;
-    private  List<Cordel> newCordels;
+    private List<Cordel> myCordels;
+    private List<Cordel> newCordels;
     private ImageButton account_user;
 
     @Override
@@ -56,14 +56,14 @@ public class MainActivity extends AppCompatActivity {
         refer_myCordels = new ArrayList<>();
         refer_myCordels = mySharedPreferences.getMyCordels();
 
-            myReflections.setAdapter(new ReflectionAdapter(getMyCordeis(), new OnItemClickListener() {
-                @Override
-                public void onItemClick(Cordel cordel) {
-                    Intent intent = new Intent(MainActivity.this, VideoActivity.class);
-                    intent.putExtra("CORDEL", cordel);
-                    startActivityForResult(intent, REQUEST_PLAY_VIDEO);
-                }
-            }));
+        myReflections.setAdapter(new ReflectionAdapter(getMyCordeis(), new OnItemClickListener() {
+            @Override
+            public void onItemClick(Cordel cordel) {
+                Intent intent = new Intent(MainActivity.this, VideoActivity.class);
+                intent.putExtra("CORDEL", cordel);
+                startActivityForResult(intent, REQUEST_PLAY_VIDEO);
+            }
+        }));
 
         newReflections.setAdapter(new ReflectionAdapter(getNewCordeis(), new OnItemClickListener() {
             @Override
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent it = new Intent(MainActivity.this, NewCordelActivity.class);
                 it.putExtra("NEWCORDEL", cordel);
                 startActivity(it);
-                }
+            }
         }));
 
         account_user.setOnClickListener(new View.OnClickListener() {
@@ -92,20 +92,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public List<Cordel> getMyCordeis() {
-        int color = getResources().getColor(R.color.colorAccent);
         myCordels = new ArrayList<>();
-        for (String refer : refer_myCordels){
-            Cordel cordel = new Cordel(refer, refer, color);
+        for (String refer : refer_myCordels) {
+            Cordel cordel = new Cordel(refer, refer, getImage(refer));
             myCordels.add(cordel);
         }
         return myCordels;
     }
 
+    private int getImage(String refer) {
+        switch (refer) {
+            case "Lamentações 3:22-23":
+                return R.mipmap.lamentacoes_3_22_23;
+            case "Filipenses 3:13-14":
+                return R.mipmap.filipenses_3_13_14;
+        }
+        return 0;
+    }
+
     public List<Cordel> getNewCordeis() {
         newCordels = new ArrayList<>();
-        int colorNew = getResources().getColor(R.color.colorPrimaryDark);
-        Cordel cordel = new Cordel("Filipenses 3:13-14", "Filipenses 3:13-14", colorNew);
-        newCordels.add(cordel);
+        if (isNewToUser("Filipenses 3:13-14")) {
+            Cordel cordel = new Cordel("Filipenses 3:13-14", "Filipenses 3:13-14", R.mipmap.filipenses_3_13_14);
+            newCordels.add(cordel);
+        }
         return newCordels;
+    }
+
+    private boolean isNewToUser(String refer) {
+        return !refer_myCordels.contains(refer);
     }
 }
