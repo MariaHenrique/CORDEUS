@@ -26,7 +26,7 @@ public class NewCordelActivity extends AppCompatActivity {
     private String login;
     private HashMap<String, String> userDetails;
     private MySharedPreferences mySharedPreferences;
-
+    public static View mLoadingBuyCordel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,7 @@ public class NewCordelActivity extends AppCompatActivity {
         dialog_code.setCancelable(true);
         dialog_code.show();
 
+        mLoadingBuyCordel = dialog_code.findViewById(R.id.loadingBuyCordel);
         final EditText code_promotional = (EditText) dialog_code.findViewById(R.id.et_code);
         final TextInputLayout mLayoutCode = (TextInputLayout) dialog_code.findViewById(R.id.input_layout_code);
         Button btn_ok = (Button) dialog_code.findViewById(R.id.btn_ok);

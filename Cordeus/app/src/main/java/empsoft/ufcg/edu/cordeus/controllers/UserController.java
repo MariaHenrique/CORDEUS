@@ -16,6 +16,7 @@ import empsoft.ufcg.edu.cordeus.utils.HttpUtils;
 import empsoft.ufcg.edu.cordeus.utils.MySharedPreferences;
 import empsoft.ufcg.edu.cordeus.views.LoginActivity;
 import empsoft.ufcg.edu.cordeus.views.MainActivity;
+import empsoft.ufcg.edu.cordeus.views.NewCordelActivity;
 import empsoft.ufcg.edu.cordeus.views.RegisterActivity;
 
 public class UserController {
@@ -147,6 +148,7 @@ public class UserController {
 
     public void validateCode(final String login, final String cordel_name, final String code,
                              final Class classDest){
+        NewCordelActivity.mLoadingBuyCordel.setVisibility(View.VISIBLE);
         String rout_get_code = "http://cordeus-cordeus.rhcloud.com/getcode";
         final JSONObject json = new JSONObject();
         try {
@@ -165,7 +167,7 @@ public class UserController {
                                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        // mLoading.setVisibility(View.GONE);
+                                        NewCordelActivity.mLoadingBuyCordel.setVisibility(View.GONE);
                                     }
                                 })
                                 .create()
@@ -186,6 +188,7 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                NewCordelActivity.mLoadingBuyCordel.setVisibility(View.GONE);
                             }
                         })
                         .create()

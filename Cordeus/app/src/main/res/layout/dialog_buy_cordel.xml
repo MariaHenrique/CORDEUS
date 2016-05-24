@@ -34,4 +34,19 @@
         android:textColor="@color/green"
         android:text="ok" />
 
+    <RelativeLayout
+        android:id="@+id/loadingBuyCordel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#64000000"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            style="?android:attr/progressBarStyleLarge"/>
+
+    </RelativeLayout>
+
 </RelativeLayout>

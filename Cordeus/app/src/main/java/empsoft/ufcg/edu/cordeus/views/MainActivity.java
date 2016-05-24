@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mySharedPreferences.logoutUser();
+                finish();
             }
         });
     }
