@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Cordel> myCordels;
     private List<Cordel> newCordels;
     private ImageButton account_user;
+    private ImageButton about;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         llm2.setOrientation(LinearLayoutManager.HORIZONTAL);
 
         account_user = (ImageButton) findViewById(R.id.ib_account);
+        about = (ImageButton) findViewById(R.id.ib_about);
 
         myReflections = (RecyclerView) findViewById(R.id.my_reflections);
         myReflections.setLayoutManager(llm);
@@ -68,6 +70,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mySharedPreferences.logoutUser();
                 finish();
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(it);
             }
         });
     }
@@ -115,20 +125,44 @@ public class MainActivity extends AppCompatActivity {
     private int getImage(String refer) {
         switch (refer) {
             case "Lamentações 3:22-23":
-                return R.mipmap.lamentacoes_3_22_23;
+                return R.drawable.lamentacoes100;
             case "Filipenses 3:13-14":
-                return R.mipmap.filipenses_3_13_14;
+                return R.drawable.filipenses100;
+            case "São João":
+                return R.drawable.saojoao100;
+            case "São Pedro":
+                return R.drawable.saopedro100;
+            case "São Antônio":
+                return R.drawable.santoantonio100;
             default:
                 return R.mipmap.cordel_blocked;
         }
     }
+
+    private int getImageSmall(String refer){
+        switch (refer) {
+            case "Lamentações 3:22-23":
+                return R.drawable.lamentacoes60;
+            case "Filipenses 3:13-14":
+                return R.drawable.filipenses60;
+            case "São João":
+                return R.drawable.saojoao60;
+            case "São Pedro":
+                return R.drawable.saopedro60;
+            case "São Antônio":
+                return R.drawable.santoantonio60;
+            default:
+                return R.mipmap.cordel_blocked;
+        }
+    }
+
 
     public List<Cordel> getNewCordeis() {
         newCordels = new ArrayList<>();
         refer_newCordels = getRefNewCordels();
         for (String ref : refer_newCordels) {
             if (isNewToUser(ref)) {
-                Cordel cordel = new Cordel(ref, ref, getImage(ref));
+                Cordel cordel = new Cordel(ref, ref, getImageSmall(ref));
                 newCordels.add(cordel);
             }
         }
@@ -144,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         refNewCordels.add("Filipenses 3:13-14");
         refNewCordels.add("São João");
         refNewCordels.add("São Pedro");
-        refNewCordels.add("Santo Antônio kjdjfjjfjfjjfjjdjjjdjdjdjdjdjdjdjdjjd");
+        refNewCordels.add("Santo Antônio");
         return refNewCordels;
     }
 }

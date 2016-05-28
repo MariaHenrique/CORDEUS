@@ -15,4 +15,5 @@
     <color name="yellow">#ffff33</color>
     <color name="pink">#ff6369</color>
     <color name="blue">#414466</color>
+    <color name="blue_dark">#373A59</color>
 </resources>

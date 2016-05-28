@@ -22,5 +22,12 @@
     <string name="btn_to_buy">Comprar</string>
     <string name="btn_code">Usar código promocional</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="developers">Desenvolvedores</string>
+    <string name="designer">Designers</string>
+    <string name="developers_name">José Aparecido Silvano de Albuquerque \nLucas Marlon Lira Marques \nMaria Daniela Costa Henrique</string>
+    <string name="designs_name">Fábio Albuquerque Silva \nLayane Alves Oliveira \nPedro Henrique Camino Xavier</string>
+    <string name="title_activity_about">Sobre</string>
+
+
 
 </resources>
