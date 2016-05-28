@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import empsoft.ufcg.edu.cordeus.R;
+import empsoft.ufcg.edu.cordeus.adapters.CordelAdapter;
 import empsoft.ufcg.edu.cordeus.controllers.UserController;
 import empsoft.ufcg.edu.cordeus.models.Cordel;
 import empsoft.ufcg.edu.cordeus.utils.MySharedPreferences;
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateMyReflections() {
-        myReflections.setAdapter(new ReflectionAdapter(getMyCordeis(), new OnItemClickListener() {
+        myReflections.setAdapter(new CordelAdapter(getMyCordeis(), 1, new OnItemClickListener() {
             @Override
             public void onItemClick(Cordel cordel) {
                 Intent intent = new Intent(MainActivity.this, VideoActivity.class);
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateNewReflections() {
-        newReflections.setAdapter(new ReflectionAdapter(getNewCordeis(), new OnItemClickListener() {
+        newReflections.setAdapter(new CordelAdapter(getNewCordeis(), 2, new OnItemClickListener() {
             @Override
             public void onItemClick(Cordel cordel) {
                 Intent it = new Intent(MainActivity.this, NewCordelActivity.class);
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         refNewCordels.add("Filipenses 3:13-14");
         refNewCordels.add("São João");
         refNewCordels.add("São Pedro");
-        refNewCordels.add("Santo Antônio");
+        refNewCordels.add("Santo Antônio kjdjfjjfjfjjfjjdjjjdjdjdjdjdjdjdjdjjd");
         return refNewCordels;
     }
 }

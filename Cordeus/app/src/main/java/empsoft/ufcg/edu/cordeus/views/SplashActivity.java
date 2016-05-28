@@ -3,20 +3,16 @@ package empsoft.ufcg.edu.cordeus.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import empsoft.ufcg.edu.cordeus.R;
 import empsoft.ufcg.edu.cordeus.utils.MySharedPreferences;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT = 1500;
+    private static int SPLASH_TIME_OUT = 2000;
     MySharedPreferences mySharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
