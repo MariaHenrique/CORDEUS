@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="20dp"
-            android:src="@drawable/logofinal200x200"
+            android:src="@drawable/logomarca"
             android:scaleType="fitCenter"/>
     </LinearLayout>
 

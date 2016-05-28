@@ -22,7 +22,7 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:src="@drawable/logofinal200x200"
+            android:src="@drawable/logomarca"
             android:layout_gravity="center_vertical"/>
 
     </LinearLayout>

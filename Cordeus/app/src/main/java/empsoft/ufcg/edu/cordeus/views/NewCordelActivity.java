@@ -55,7 +55,8 @@ public class NewCordelActivity extends AppCompatActivity {
         final ImageView imageView = (ImageView) findViewById(R.id.iv_cordel);
         final TextView tvTitle = (TextView) findViewById(R.id.tv_title);
         final TextView tvPassage = (TextView) findViewById(R.id.tv_passage);
-        imageView.setBackgroundResource(cordel.getIcon());
+
+        imageView.setBackgroundResource(getImage(cordel.getTitle()));
         tvTitle.setText(cordel.getTitle());
         tvPassage.setText(cordel.getPassage());
     }
@@ -88,6 +89,20 @@ public class NewCordelActivity extends AppCompatActivity {
 
     }
 
+    private int getImage(String refer) {
+        switch (refer) {
+            case "Filipenses 3:13-14":
+                return R.drawable.filipenses150;
+            case "São João":
+                return R.drawable.saojoao150;
+            case "São Pedro":
+                return R.drawable.saopedro150;
+            case "Santo Antônio":
+                return R.drawable.santoantonio150;
+            default:
+                return R.mipmap.cordel_blocked;
+        }
+    }
     private boolean validateCodePromotional(final String code, final EditText editTextCode, final TextInputLayout layoutCode) {
         if (code.trim().isEmpty()) {
             layoutCode.setError(getString(R.string.err_msg_code_promotional));

@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 return R.drawable.saojoao100;
             case "São Pedro":
                 return R.drawable.saopedro100;
-            case "São Antônio":
+            case "Santo Antônio":
                 return R.drawable.santoantonio100;
             default:
                 return R.mipmap.cordel_blocked;
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 return R.drawable.saojoao60;
             case "São Pedro":
                 return R.drawable.saopedro60;
-            case "São Antônio":
+            case "Santo Antônio":
                 return R.drawable.santoantonio60;
             default:
                 return R.mipmap.cordel_blocked;
