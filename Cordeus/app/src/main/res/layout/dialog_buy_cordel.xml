@@ -31,7 +31,22 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:textColor="@color/blue"
-        android:text="ok" />
+        android:textColor="@color/colorPrimary"
+        android:text="OK" />
+
+    <RelativeLayout
+        android:id="@+id/loadingBuyCordel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#64000000"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            style="?android:attr/progressBarStyleLarge"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
