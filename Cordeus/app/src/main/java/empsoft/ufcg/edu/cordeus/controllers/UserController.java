@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 
 import org.json.JSONArray;
@@ -55,7 +54,7 @@ public class UserController {
                 if (result.getInt("ok") == 0) {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
-                            .setMessage(result.getString("msg"))
+                            .setMessage("Usuário já cadastrado")
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -116,7 +115,7 @@ public class UserController {
                     if (result.getInt("ok") == 0) {
                         new AlertDialog.Builder(mActivity)
                                 .setTitle("Erro")
-                                .setMessage(result.getString("msg"))
+                                .setMessage("Usuário não cadastrado")
                                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -186,7 +185,7 @@ public class UserController {
                     if (result.getInt("ok") == 0) {
                         new AlertDialog.Builder(mActivity)
                                 .setTitle("Erro")
-                                .setMessage(result.getString("msg"))
+                                .setMessage("Código inválido")
                                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -233,7 +232,7 @@ public class UserController {
                 if (result.getInt("ok") == 0) {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
-                            .setMessage(result.getString("msg"))
+                            .setMessage(result.getString("Código não existente"))
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
