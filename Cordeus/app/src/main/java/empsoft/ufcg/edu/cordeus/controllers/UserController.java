@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import empsoft.ufcg.edu.cordeus.utils.HttpListener;
 import empsoft.ufcg.edu.cordeus.utils.HttpUtils;
 import empsoft.ufcg.edu.cordeus.utils.MySharedPreferences;
@@ -121,8 +123,25 @@ public class UserController {
                                 .show();
                     } else {
                         mySharedPreferences.saveUser(login, password);
-                        setView(mActivity, classDest);
-                        mActivity.finish();
+                        getMyCordels(login);
+                        List<String> cordelList = mySharedPreferences.getMyCordels();
+                        if (cordelList != null && cordelList.size() > 0){
+                            setView(mActivity, classDest);
+                            mActivity.finish();
+                        } else{
+                            new AlertDialog.Builder(mActivity)
+                                    .setTitle("Erro")
+                                    .setMessage("Verifique sua conexão.")
+                                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            LoginActivity.mLoadingLogin.setVisibility(View.GONE);
+                                        }
+                                    })
+                                    .create()
+                                    .show();
+                        }
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -289,6 +308,7 @@ public class UserController {
                                     })
                                     .create()
                                     .show();
+
                             setView(mActivity, classDest);
                             mActivity.finish();
                         }
@@ -296,6 +316,7 @@ public class UserController {
                         e.printStackTrace();
                     }
                 }
+
                 @Override
                 public void onTimeout() {
                     new AlertDialog.Builder(mActivity)
@@ -324,13 +345,32 @@ public class UserController {
                     JSONObject jsonUser = response.getJSONObject("result");
                     JSONArray jsonArray = jsonUser.getJSONArray("listMyCordels");
                     mySharedPreferences.saveListMyCordels(jsonArray.toString());
+                } else {
+                    new AlertDialog.Builder(mActivity)
+                            .setTitle("Erro")
+                            .setMessage(response.getString("msg"))
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    // mLoading.setVisibility(View.GONE);
+                                }
+                            })
+                            .create()
+                            .show();
                 }
             }
 
             @Override
             public void onTimeout() {
-
-                //Colocar o dialog de timeout
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível.")
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        })
+                        .create().show();
 
             }
         });

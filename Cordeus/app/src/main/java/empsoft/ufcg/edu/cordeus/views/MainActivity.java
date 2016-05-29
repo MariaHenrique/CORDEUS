@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
         userDetails = mySharedPreferences.getUserDetails();
         login = userDetails.get(MySharedPreferences.KEY_USERNAME);
 
-        refer_myCordels = new ArrayList<>();
-        refer_myCordels = mySharedPreferences.getMyCordels();
 
         updateMyReflections();
         updateNewReflections();
@@ -115,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
 
     public List<Cordel> getMyCordeis() {
         myCordels = new ArrayList<>();
+        refer_myCordels = new ArrayList<>();
+        refer_myCordels = mySharedPreferences.getMyCordels();
+
         for (String refer : refer_myCordels) {
             Cordel cordel = new Cordel(refer, refer, getImage(refer));
             myCordels.add(cordel);

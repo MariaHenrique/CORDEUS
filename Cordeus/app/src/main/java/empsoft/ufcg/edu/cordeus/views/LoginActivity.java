@@ -3,13 +3,12 @@ package empsoft.ufcg.edu.cordeus.views;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.support.design.widget.TextInputLayout;
 
 import empsoft.ufcg.edu.cordeus.R;
 import empsoft.ufcg.edu.cordeus.controllers.UserController;
@@ -52,8 +51,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (validateUsername() && validatePassword()) {
                     userController.login(username, password, MainActivity.class);
-                    userController.getMyCordels(username);
-                    Log.d("USER_LOGGED", mySharedPreferences.isUserLoggedIn() + "");
                 } else if (!validateUsername()){
                     return;
                 } else if (!validatePassword()){
