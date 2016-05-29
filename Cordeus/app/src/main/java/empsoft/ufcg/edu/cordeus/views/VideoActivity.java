@@ -25,11 +25,11 @@ public class VideoActivity extends Activity implements MediaPlayer.OnCompletionL
 
         Uri video = null;
         final VideoView videoView = (VideoView) findViewById(R.id.videoView);
-        if (cordel.getTitle().equals("Lamentações 3:22-23")){
+        if (cordel.getTitle().equals("Deus é amor")){
             video = Uri.parse("android.resource://" + getPackageName() + "/" +
                     R.raw.lamentacoes3_22_23);
         }
-        if (cordel.getTitle().equals("Filipenses 3:13-14")){
+        if (cordel.getTitle().equals("Confie no Senhor")){
             video = Uri.parse("android.resource://" + getPackageName() + "/" +
                     R.raw.filipenses_3_13_14);
         }

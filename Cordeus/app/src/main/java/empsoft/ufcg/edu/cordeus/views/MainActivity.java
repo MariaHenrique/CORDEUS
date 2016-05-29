@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         login = userDetails.get(MySharedPreferences.KEY_USERNAME);
 
 
+        userController.getMyCordels(login);
         updateMyReflections();
         updateNewReflections();
 
@@ -125,9 +126,9 @@ public class MainActivity extends AppCompatActivity {
 
     private int getImage(String refer) {
         switch (refer) {
-            case "Lamentações 3:22-23":
+            case "Deus é amor":
                 return R.drawable.lamentacoes100;
-            case "Filipenses 3:13-14":
+            case "Confie no Senhor":
                 return R.drawable.filipenses100;
             case "São João":
                 return R.drawable.saojoao100;
@@ -142,9 +143,9 @@ public class MainActivity extends AppCompatActivity {
 
     private int getImageSmall(String refer){
         switch (refer) {
-            case "Lamentações 3:22-23":
+            case "Deus é amor":
                 return R.drawable.lamentacoes60;
-            case "Filipenses 3:13-14":
+            case "Confie no Senhor":
                 return R.drawable.filipenses60;
             case "São João":
                 return R.drawable.saojoao60;
@@ -176,10 +177,24 @@ public class MainActivity extends AppCompatActivity {
 
     public List<String> getRefNewCordels() {
         List<String> refNewCordels = new ArrayList<>();
-        refNewCordels.add("Filipenses 3:13-14");
+        refNewCordels.add("Confie no Senhor");
         refNewCordels.add("São João");
         refNewCordels.add("São Pedro");
         refNewCordels.add("Santo Antônio");
         return refNewCordels;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        updateMyReflections();
+        updateNewReflections();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateMyReflections();
+        updateNewReflections();
     }
 }

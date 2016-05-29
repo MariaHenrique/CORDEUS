@@ -12,10 +12,12 @@
         android:id="@+id/tv_cordel_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="2"
         android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="12sp"
+        android:layout_gravity="center"
         android:textColor="@color/black"
-        android:gravity="center"/>
+        />
 
 
     <RelativeLayout

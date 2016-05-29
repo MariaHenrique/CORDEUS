@@ -62,7 +62,7 @@ public class UserController {
                             .create()
                             .show();
                 } else {
-                    addCordel(username, "Lamentações 3:22-23", MainActivity.class);
+                    addCordel(username, "Deus é amor", MainActivity.class);
                     new AlertDialog.Builder(mActivity)
 
                             .setMessage("Cadastro realizado com sucesso!")
@@ -246,7 +246,8 @@ public class UserController {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     addCordel(login, cordel_name, MainActivity.class);
-                                    setView(mActivity, classDest);
+                                    mActivity.finish();
+                                    dialogInterface.dismiss();
                                 }
                             })
                             .create()
@@ -303,14 +304,14 @@ public class UserController {
                                     .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
-                                            // mLoading.setVisibility(View.GONE);
+                                            setView(mActivity, classDest);
+                                            mActivity.finish();
+                                            dialogInterface.dismiss();
+
                                         }
                                     })
                                     .create()
                                     .show();
-
-                            setView(mActivity, classDest);
-                            mActivity.finish();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

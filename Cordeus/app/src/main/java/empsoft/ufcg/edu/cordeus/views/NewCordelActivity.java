@@ -1,6 +1,7 @@
 package empsoft.ufcg.edu.cordeus.views;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -84,14 +85,24 @@ public class NewCordelActivity extends AppCompatActivity {
                 } else if (!validateCodePromotional(code, code_promotional, mLayoutCode)) {
                     return;
                 }
+
+                dialog_code.dismiss();
             }
         });
 
     }
 
+    public void setView(Context context, Class classe) {
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
+
+    }
+
+
     private int getImage(String refer) {
         switch (refer) {
-            case "Filipenses 3:13-14":
+            case "Confia no Senhor":
                 return R.drawable.filipenses150;
             case "São João":
                 return R.drawable.saojoao150;
