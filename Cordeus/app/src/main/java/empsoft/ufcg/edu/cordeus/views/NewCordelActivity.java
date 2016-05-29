@@ -34,6 +34,7 @@ public class NewCordelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_cordel);
 
+        mLoadingBuyCordel = findViewById(R.id.loadingBuyCordel);
         final Button code_promotional = (Button) findViewById(R.id.btn_code_promotional);
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
         userController = new UserController(NewCordelActivity.this);
@@ -70,7 +71,6 @@ public class NewCordelActivity extends AppCompatActivity {
         dialog_code.setCancelable(true);
         dialog_code.show();
 
-        mLoadingBuyCordel = dialog_code.findViewById(R.id.loadingBuyCordel);
         final EditText code_promotional = (EditText) dialog_code.findViewById(R.id.et_code);
         final TextInputLayout mLayoutCode = (TextInputLayout) dialog_code.findViewById(R.id.input_layout_code);
         Button btn_ok = (Button) dialog_code.findViewById(R.id.btn_ok);
@@ -85,20 +85,10 @@ public class NewCordelActivity extends AppCompatActivity {
                 } else if (!validateCodePromotional(code, code_promotional, mLayoutCode)) {
                     return;
                 }
-
                 dialog_code.dismiss();
             }
         });
-
     }
-
-    public void setView(Context context, Class classe) {
-        Intent it = new Intent();
-        it.setClass(context, classe);
-        startActivity(it);
-
-    }
-
 
     private int getImage(String refer) {
         switch (refer) {
