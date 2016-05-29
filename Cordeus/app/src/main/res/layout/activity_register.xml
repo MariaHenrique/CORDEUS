@@ -26,7 +26,6 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="20dp"
-            android:layout_marginTop="?attr/actionBarSize"
             android:gravity="center_horizontal">
 
             <android.support.design.widget.TextInputLayout
