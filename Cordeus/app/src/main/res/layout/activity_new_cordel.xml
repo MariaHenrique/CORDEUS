@@ -72,8 +72,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_weight="0.3"
-            android:paddingTop="40dp"
-            android:paddingBottom="20dp">
+            android:paddingTop="30dp"
+            android:paddingBottom="10dp">
 
             <Button
                 android:layout_width="fill_parent"
