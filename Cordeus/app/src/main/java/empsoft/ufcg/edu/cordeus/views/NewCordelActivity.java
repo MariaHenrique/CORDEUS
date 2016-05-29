@@ -102,7 +102,7 @@ public class NewCordelActivity extends AppCompatActivity {
 
     private int getImage(String refer) {
         switch (refer) {
-            case "Confia no Senhor":
+            case "Confie no Senhor":
                 return R.drawable.filipenses150;
             case "São João":
                 return R.drawable.saojoao150;
