@@ -28,6 +28,7 @@ public class  MySharedPreferences {
     public static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_LIST_MY_CORDELS = "listMyCordels";
+    public static final int READY_TO_UPDATE = 11;
 
     public MySharedPreferences(Context context){
         this.mContext = context;

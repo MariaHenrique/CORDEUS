@@ -2,6 +2,8 @@ package empsoft.ufcg.edu.cordeus.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,10 +37,23 @@ public class MainActivity extends AppCompatActivity {
     private List<Cordel> newCordels;
     private ImageButton account_user;
     private ImageButton about;
+    private Handler handler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            Log.d(TAG, "chegou no handleMessage");
+            if (msg.what == MySharedPreferences.READY_TO_UPDATE) {
+                Log.d(TAG, "no handleMessage e mandou atualizar");
+                updateMyReflections();
+                updateNewReflections();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "entrou no onCreate");
         setContentView(R.layout.activity_main);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -59,8 +74,7 @@ public class MainActivity extends AppCompatActivity {
         userDetails = mySharedPreferences.getUserDetails();
         login = userDetails.get(MySharedPreferences.KEY_USERNAME);
 
-
-        userController.getMyCordels(login);
+        userController.getMyCordels(login, handler);
         updateMyReflections();
         updateNewReflections();
 
@@ -141,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private int getImageSmall(String refer){
+    private int getImageSmall(String refer) {
         switch (refer) {
             case "Deus é amor":
                 return R.drawable.lamentacoes60;
@@ -185,18 +199,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
-        userController.getMyCordels(login);
-        updateMyReflections();
-        updateNewReflections();
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        userController.getMyCordels(login);
-        updateMyReflections();
-        updateNewReflections();
+        userController.getMyCordels(login, handler);
     }
 }

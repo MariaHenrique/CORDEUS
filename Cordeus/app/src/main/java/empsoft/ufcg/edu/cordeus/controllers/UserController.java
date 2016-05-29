@@ -5,6 +5,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 
 import org.json.JSONArray;
@@ -31,11 +34,11 @@ public class UserController {
     public UserController(Activity activity) {
         mActivity = activity;
         mHttp = new HttpUtils(mActivity);
-        url =  "http://cordeus-cordeus.rhcloud.com/";
+        url = "http://cordeus-cordeus.rhcloud.com/";
         mySharedPreferences = new MySharedPreferences(mActivity.getApplicationContext());
     }
 
-    public void registerUser(final String username, String password){
+    public void registerUser(final String username, String password) {
         RegisterActivity.mLoadingRegister.setVisibility(View.VISIBLE);
         String rout_register = url + "registeruser";
         JSONObject json = new JSONObject();
@@ -48,7 +51,7 @@ public class UserController {
 
         mHttp.post(rout_register, json.toString(), new HttpListener() {
             @Override
-            public void onSucess(JSONObject result) throws JSONException{
+            public void onSucess(JSONObject result) throws JSONException {
                 if (result.getInt("ok") == 0) {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
@@ -77,6 +80,7 @@ public class UserController {
                             .show();
                 }
             }
+
             @Override
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
@@ -125,10 +129,10 @@ public class UserController {
                         mySharedPreferences.saveUser(login, password);
                         getMyCordels(login);
                         List<String> cordelList = mySharedPreferences.getMyCordels();
-                        if (cordelList != null && cordelList.size() > 0){
+                        if (cordelList != null && cordelList.size() > 0) {
                             setView(mActivity, classDest);
                             mActivity.finish();
-                        } else{
+                        } else {
                             new AlertDialog.Builder(mActivity)
                                     .setTitle("Erro")
                                     .setMessage("Verifique sua conexão.")
@@ -166,7 +170,7 @@ public class UserController {
     }
 
     public void validateCode(final String login, final String cordel_name, final String code,
-                             final Class classDest){
+                             final Class classDest) {
         NewCordelActivity.mLoadingBuyCordel.setVisibility(View.VISIBLE);
         String rout_get_code = "http://cordeus-cordeus.rhcloud.com/getcode";
         final JSONObject json = new JSONObject();
@@ -219,13 +223,13 @@ public class UserController {
     }
 
     private void useCode(final String login, final String cordel_name, final JSONObject json,
-                         final Class classDest){
+                         final Class classDest) {
 
         String rout_remove_code = url + "removecode";
 
         mHttp.post(rout_remove_code, json.toString(), new HttpListener() {
             @Override
-            public void onSucess(JSONObject result) throws JSONException{
+            public void onSucess(JSONObject result) throws JSONException {
                 if (result.getInt("ok") == 0) {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
@@ -254,6 +258,7 @@ public class UserController {
                             .show();
                 }
             }
+
             @Override
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
@@ -271,58 +276,88 @@ public class UserController {
         });
     }
 
-    public void addCordel(final String login, final String refercordel, final Class classDest){
-            //mLoading.setVisibility(View.VISIBLE);
-            String rout_add_cordel = url + "addCordel";
-            final JSONObject json = new JSONObject();
-            try {
-                json.put("login", login);
-                json.put("refercordel", refercordel);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            mHttp.post(rout_add_cordel, json.toString(), new HttpListener() {
-                @Override
-                public void onSucess(JSONObject result) {
-                    try {
-                        if (result.getInt("ok") == 0) {
-                            new AlertDialog.Builder(mActivity)
-                                    .setTitle("Erro")
-                                    .setMessage(result.getString("msg"))
-                                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            // mLoading.setVisibility(View.GONE);
-                                        }
-                                    })
-                                    .create()
-                                    .show();
-                        } else {
-                            new AlertDialog.Builder(mActivity)
-                                    .setTitle("Cordel adicionado")
-                                    .setMessage(result.getString("Já está disponível em seus cordeis."))
-                                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            setView(mActivity, classDest);
-                                            mActivity.finish();
-                                            dialogInterface.dismiss();
+    public void addCordel(final String login, final String refercordel, final Class classDest) {
+        //mLoading.setVisibility(View.VISIBLE);
+        String rout_add_cordel = url + "addCordel";
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("login", login);
+            json.put("refercordel", refercordel);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mHttp.post(rout_add_cordel, json.toString(), new HttpListener() {
+            @Override
+            public void onSucess(JSONObject result) {
+                try {
+                    if (result.getInt("ok") == 0) {
+                        new AlertDialog.Builder(mActivity)
+                                .setTitle("Erro")
+                                .setMessage(result.getString("msg"))
+                                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        // mLoading.setVisibility(View.GONE);
+                                    }
+                                })
+                                .create()
+                                .show();
+                    } else {
+                        new AlertDialog.Builder(mActivity)
+                                .setTitle("Cordel adicionado")
+                                .setMessage(result.getString("Já está disponível em seus cordeis."))
+                                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        setView(mActivity, classDest);
+                                        mActivity.finish();
+                                        dialogInterface.dismiss();
 
-                                        }
-                                    })
-                                    .create()
-                                    .show();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                                    }
+                                })
+                                .create()
+                                .show();
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+            }
 
-                @Override
-                public void onTimeout() {
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível.")
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // mLoading.setVisibility(View.GONE);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+
+
+        });
+    }
+
+    public void getMyCordels(String username, final Handler handler) {
+        String route_get_user = "http://cordeus-cordeus.rhcloud.com/getUser?login=" + username;
+        mHttp.get(route_get_user, new HttpListener() {
+            @Override
+            public void onSucess(JSONObject response) throws JSONException {
+                if (response.getInt("ok") == 1) {
+                    JSONObject jsonUser = response.getJSONObject("result");
+                    JSONArray jsonArray = jsonUser.getJSONArray("listMyCordels");
+                    mySharedPreferences.saveListMyCordels(jsonArray.toString());
+                    Message message = new Message();
+                    message.what = MySharedPreferences.READY_TO_UPDATE;
+                    handler.sendMessage(message);
+                } else {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
-                            .setMessage("Conexão não disponível.")
+                            .setMessage(response.getString("msg"))
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -332,9 +367,22 @@ public class UserController {
                             .create()
                             .show();
                 }
+            }
 
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível.")
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        })
+                        .create().show();
 
-            });
+            }
+        });
     }
 
     public void getMyCordels(String username) {
